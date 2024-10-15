@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from envs.game import MarshalNotes, MAX_HAND_SIZE, multibinary_to_cards
+from envs.fugitive import MarshalNotes, MAX_HAND_SIZE, multibinary_to_cards
 
 class TestMarshalNotes(unittest.TestCase):
 
