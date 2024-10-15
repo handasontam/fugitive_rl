@@ -1,0 +1,363 @@
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_0
+Deck Sizes: Low: 8, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 2, 3, 8, 12, 14, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 0
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 0, Sprint: 
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [0 1 2]
+Agent 🦹‍ decided to Draw from deck 0
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_1
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 2, 3, 8, 10, 12, 14, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 0
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 0, Sprint: 
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  2  3  8 10 12 14]
+Agent 🦹‍ decided to Play Hideout 12
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 2, 3, 8, 10, 14, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 0
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  2  3  8 10 14 25 27]
+Agent 🦹‍ decided to Play Sprint 3
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 2, 8, 10, 14, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 3
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 1
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  2  8 10 14 25 27]
+Agent 🦹‍ decided to Play Sprint 2
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 8, 10, 14, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 2
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  8 10 14 25 27]
+Agent 🦹‍ decided to Play Sprint 14
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 8, 10, 25, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 14
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 3
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  8 10 25 27]
+Agent 🦹‍ decided to Play Sprint 25
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 8, 10, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 14, 25
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 4
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  8 10 27]
+Agent 🦹‍ decided to Play Sprint 10
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 8, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 10, 14, 25
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 5
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 1  8 27]
+Agent 🦹‍ decided to Play Sprint 8
+
+============================================================
+Current Player: 🦹‍ Fugitive
+Current Phase: fugitive_2
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 8, 10, 14, 25
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 6
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🦹‍: Available action: [ 0  1 27]
+Agent 🦹‍ decided to Play Sprint 0
+
+============================================================
+Current Player: 🚔 Marshal
+Current Phase: marshal_0
+Deck Sizes: Low: 7, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 27, 42
+🚔 Marshal Hand: 
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 8, 10, 14, 25
+  Card 2: Hideout: 0, Sprint: 
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 6
+    Guessed: 
+    Possible Range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+  Card 2: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🚔: Available action: [0 1 2]
+Agent 🚔 decided to Draw from deck 0
+
+============================================================
+Current Player: 🚔 Marshal
+Current Phase: marshal_1
+Deck Sizes: Low: 6, Medium: 12, High: 13
+
+🦹‍ Fugitive Hand: 1, 27, 42
+🚔 Marshal Hand: 5
+Last Hideout: 12
+Is Manhunt: False
+
+Fugitive's View:
+  Card 0: Hideout: 0, Sprint: 
+  Card 1: Hideout: 12, Sprint: 2, 3, 8, 10, 14, 25
+  Card 2: Hideout: 0, Sprint: 
+
+Marshal's View:
+  Card 0: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 0
+  Card 1: Hideout: 43, Sprint Size: 6
+    Guessed: 
+    Possible Range: 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+  Card 2: Hideout: 0, Sprint Size: 0
+    Guessed: 
+    Possible Range: 
+
+Game State:
+  Guessed: 
+  Revealed Hideout: 0
+  Revealed Sprint: 
+  Is 30 or above revealed: False
+============================================================
+
+Agent 🚔: Available action: [ 1  2  3  4  6  7  8  9 10 11 12 13 14 15]
+Agent 🚔 decided to Guess 12
+Marshal caught the fugitive!
+Turn Count: 11
+Episode 1 finished. Rewards: {<PlayerRole.FUGITIVE_DRAW: 'fugitive_0'>: -1, <PlayerRole.FUGITIVE_HIHDEOUT: 'fugitive_1'>: -1, <PlayerRole.FUGITIVE_SPRINT: 'fugitive_2'>: -1, <PlayerRole.MARSHAL_DRAW: 'marshal_0'>: 1, <PlayerRole.MARSHAL_GUESS: 'marshal_1'>: 1}
