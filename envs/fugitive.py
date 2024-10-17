@@ -31,8 +31,8 @@ N_HIDEOUT_ACTIONS = 44
 N_SPRINT_ACTIONS = 42
 N_GUESS_ACTIONS = 42
 
-def env():
-    env = raw_env()
+def env(*args, **kwargs):
+    env = raw_env(*args, **kwargs)
     # env = wrappers.CaptureStdoutWrapper(env)
     # env = wrappers.AssertOutOfBoundsWrapper(env)
     # env = wrappers.OrderEnforcingWrapper(env)
@@ -57,6 +57,7 @@ def get_action_start_end_index(agent: PlayerRole):
         return N_FUGITIVE_DRAW_ACTIONS + N_MARSHAL_DRAW_ACTIONS + N_HIDEOUT_ACTIONS, N_FUGITIVE_DRAW_ACTIONS + N_MARSHAL_DRAW_ACTIONS + N_HIDEOUT_ACTIONS + N_SPRINT_ACTIONS
     elif agent == PlayerRole.MARSHAL_GUESS:
         return N_FUGITIVE_DRAW_ACTIONS + N_MARSHAL_DRAW_ACTIONS + N_HIDEOUT_ACTIONS + N_SPRINT_ACTIONS, N_FUGITIVE_DRAW_ACTIONS + N_MARSHAL_DRAW_ACTIONS + N_HIDEOUT_ACTIONS + N_SPRINT_ACTIONS + N_GUESS_ACTIONS
+    
 
 
 class MarshalNotes:
@@ -150,6 +151,15 @@ class raw_env(AECEnv):
         self.render_mode = render_mode
         self.possible_agents = [PlayerRole.FUGITIVE_DRAW, PlayerRole.FUGITIVE_HIHDEOUT, PlayerRole.FUGITIVE_SPRINT, PlayerRole.MARSHAL_DRAW, PlayerRole.MARSHAL_GUESS]
         self.phase_name_mapping = dict(zip(self.possible_agents, list(range(len(self.possible_agents)))))
+        self.n_agents = 2  # TODO: change to len(self.possible_agents) when possible_agents is changed to Fugitive and Marshal
+
+    def agent_name_to_index(self, agent_name: str):
+        return 1 if agent_name in [PlayerRole.MARSHAL_DRAW, PlayerRole.MARSHAL_GUESS] else 0
+    
+    def agent_index_to_name(self, agent_index: int):
+        # Temporary solution to convert agent index to name
+        # TODO: change possible_agents to Fugitive and Marshal.
+        return PlayerRole.MARSHAL_DRAW if agent_index == 1 else PlayerRole.FUGITIVE_DRAW
 
     @lru_cache(maxsize=None)
     def observation_space(self, agent):
@@ -227,7 +237,7 @@ class raw_env(AECEnv):
             'is_manhunt': self.is_manhunt,
             # 'observation': np.int64(0), 
             'current_phase': self.phase_name_mapping[self.agent_selection],
-            'current_agent': 1 if self.agent_selection in [PlayerRole.MARSHAL_DRAW, PlayerRole.MARSHAL_GUESS] else 0
+            'current_agent': self.agent_name_to_index(self.agent_selection)
         }
 
         fugitive_private_obs = {
@@ -336,8 +346,18 @@ class raw_env(AECEnv):
 
         # Update agent selector
         if not self.is_manhunt:
-            if self.agent_selection == PlayerRole.FUGITIVE_SPRINT and action != STOP_SPRINT_ACTION:
+            if self.agent_selection == PlayerRole.MARSHAL_DRAW and np.sum(self.marshal_hand) == 1:
+                # Marshal can draw one more card at start
+                pass
+            elif self.agent_selection == PlayerRole.FUGITIVE_SPRINT:
+                if action != STOP_SPRINT_ACTION:
                     pass
+                else:
+                    if self.n_hideouts == 2 and np.sum(self.marshal_hand) == 0:
+                        # For the first turn, (i.e. marshal has not drawn any card), then fugitive can play one more hideout
+                        for _ in range(3):
+                            self._agent_selector.next()  # skip marshal's draw, guess, and figitive draw again
+                    self.agent_selection = self._agent_selector.next()  # fugitive hideout
             elif self.agent_selection == PlayerRole.FUGITIVE_HIHDEOUT and action == PASS_HIDEOUT_ACTION:
                 # Skip the fugitive's sprint turn to marshal's draw turn
                 self._agent_selector.next()
@@ -362,7 +382,7 @@ class raw_env(AECEnv):
         self.action_masks = self.get_action_mask()
         if sum(self.action_masks) == 1:  # forced move
             self.step(self.action_masks.index(1))
-
+        
         self.infos = {agent: {} for agent in self.agents}
         self.infos[self.agent_selection]["action_masks"] = np.array(self.action_masks, dtype=np.int8)
     
@@ -406,6 +426,16 @@ class raw_env(AECEnv):
                 # Update hideouts_range for the hideout
                 n_sprint = self.marshal_center_row_sprint_size[self.n_hideouts]
                 hideout = self.fugitive_center_row[self.n_hideouts]
+                # if n_sprint == 0:
+                #     # the online version of fugitive can draw a card if he didn't sprint
+                #     if self.deck_low:
+                #         self.fugitive_hand[self.deck_low.pop()] = 1
+                #     elif self.deck_medium:
+                #         self.fugitive_hand[self.deck_medium.pop()] = 1
+                #     elif self.deck_high:
+                #         self.fugitive_hand[self.deck_high.pop()] = 1
+                #     else:
+                #         pass  # No cards left to draw
                 if hideout == LAST_HIDEOUT_ACTION:
                     self.revealed_hideout[hideout] = 1
                     self.marshal_notes.add_escape_hideout(n_sprint=n_sprint)
@@ -422,13 +452,19 @@ class raw_env(AECEnv):
             self.guessed[action] = 1
             self.guessed_center_row[:self.n_hideouts, action] = 1
             if action in self.hideout2center_row_index:  # Correct guess
-                # Reveal the hideout
-                revealed_index = self.hideout2center_row_index[action]
-                # Update hideouts_range 
-                self.marshal_notes.hideout_revealed(depth=revealed_index, hideout=action)
-                # Reveal hideouts with only one possible range
+                # Reveal hideouts with only one possible range (Assume the marshal multiguess)
                 one_possible_range_indices = multibinary_to_cards(np.sum(self.marshal_notes.get_hideouts_range(), axis=1) == 1)
                 self._reveal_one_possible_hideouts(one_possible_range_indices)
+
+                # Reveal the hideout
+                revealed_index = self.hideout2center_row_index[action]
+                self.marshal_center_row[revealed_index] = action
+                self.revealed_hideout[action] = 1
+                # Update hideouts_range 
+                self.marshal_notes.hideout_revealed(depth=revealed_index, hideout=action)
+                revealed_sprints = self.fugitive_center_row_sprint[revealed_index]
+                self.revealed_sprint[revealed_sprints.astype(bool)] = 1
+                self.marshal_notes.eliminate_vals(multibinary_to_cards(revealed_sprints))
             else:
                 self.marshal_notes.eliminate_vals([action])
                 if self.is_manhunt:
@@ -467,7 +503,6 @@ class raw_env(AECEnv):
     def _accumulate_rewards(self):
         if self._check_termination():
             if LAST_HIDEOUT_ACTION in self.hideout2center_row_index and not self.is_manhunt:  # Fugitive escaped
-                print("Fugitive escaped!")
                 self.rewards = {
                     PlayerRole.FUGITIVE_DRAW: 1, 
                     PlayerRole.FUGITIVE_HIHDEOUT: 1, 
@@ -476,7 +511,6 @@ class raw_env(AECEnv):
                     PlayerRole.MARSHAL_GUESS: -1
                 }
             else:  # Marshal caught the fugitive
-                print("Marshal caught the fugitive!")
                 self.rewards = {
                     PlayerRole.FUGITIVE_DRAW: -1, 
                     PlayerRole.FUGITIVE_HIHDEOUT: -1, 
@@ -527,6 +561,15 @@ class raw_env(AECEnv):
                 legal_mask = (numbers_in_range & not_revealed_mask)[:LAST_HIDEOUT_ACTION]  # should not guess 42
                 mask[start_index:end_index] = list(legal_mask)
         return mask
+    
+    # def _bluffed_value(self):
+    #     cur = self.n_hideouts
+    #     target_hideout = self.fugitive_center_row[cur]
+    #     previous_hideout = self.fugitive_center_row[cur-1]
+    #     cur_sprint_cards = multibinary_to_cards(self.fugitive_center_row_sprint[cur,:])
+    #     current_sprint = self._get_total_sprint(cur_sprint_cards)
+    #     return previous_hideout + 3 + current_sprint - target_hideout
+
 
     def _can_stop_sprint(self):
         cur = self.n_hideouts

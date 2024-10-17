@@ -12,7 +12,12 @@ conda create -n fugitive --file environment.yml
 conda activate fugitive
 ```
 
-# See game play from random agent
+# See game play from random agents
 ```bash
 python envs/game.py
+```
+
+# Train Self-Play PPO
+```bash
+python train.py
 ```
